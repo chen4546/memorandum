@@ -59,6 +59,9 @@ const indexStore = defineStore("index", {
   getters: {
     activeMemos: (state) =>
       state.memos.filter((r) => r.cata_id == state.active_cataid),
+    activeMemo(state): MemoType {
+      return this.activeMemos.find((r) => r.memo_id == state.active_memoid);
+    },
   },
 });
 export default indexStore;

@@ -3,3 +3,4 @@
 export default {};
 </script>
 <style></style>
+export CustHeader;

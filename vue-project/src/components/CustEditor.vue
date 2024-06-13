@@ -4,8 +4,10 @@
     <!--插槽-->
     <slot />
     <editor
-      node="simple"
-      v-model="valueHtml"
+      mode="simple"
+      class="edito-content"
+      :dafaultConfig="props.modelValue"
+      onChange="onChange"
       @onCreated="(ref) => (editorRef = ref)"
     />
   </div>
@@ -15,6 +17,17 @@ import { ref, shallowRef } from "vue";
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
 const valueHtml = ref("<p> hello </p>");
 const editorRef = shallowRef();
+const props = defineProps<{
+  modelValue: string;
+}>();
+const emits = defineEmits<{
+  (e: "update:modelValue", html: string): void;
+  (e: "Change", html: string): void;
+}>();
+const onChange = (editor) => {
+  emits("update:modelValue", editor.getHtml());
+  //let tool bar=DomEditor.getToolbar(editor);
+};
 </script>
 <style lang="less">
 @import "@wangeditor/editor/dist/css/style.css";
